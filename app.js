@@ -1,4 +1,4 @@
-const API_KEY = 'ed7f0021-9abe-4d9e-82b8-95d77df78fb5';
+const API_KEY = 'YOUR_COINMARKETCAP_API_KEY'; // Replace with your CoinMarketCap API Key
 const API_URL = 'https://cors-anywhere.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
 const FAVORITES_KEY = 'favorites';
 
@@ -42,9 +42,13 @@ function renderCoins(coins) {
 
 // Add a coin to the favorites list (store the full coin object)
 function addToFavorites(coinId) {
+  // Find the coin by ID in the allCoins array
   const coin = allCoins.find(c => c.id === coinId);
+  
   if (coin) {
     let favorites = JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
+    
+    // Check if coin is already in favorites to avoid duplicates
     if (!favorites.some(fav => fav.id === coin.id)) {
       favorites.push(coin);  // Store the entire coin object
       localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
