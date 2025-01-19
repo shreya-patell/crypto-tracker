@@ -40,26 +40,29 @@ function renderCoins(coins) {
   });
 }
 
-// Add a coin to the favorites list
+// Add a coin to the favorites list (store the full coin object)
 function addToFavorites(coinId) {
-  let favorites = JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
-  if (!favorites.includes(coinId)) {
-    favorites.push(coinId);
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
-    renderFavorites();
+  const coin = allCoins.find(c => c.id === coinId);
+  if (coin) {
+    let favorites = JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
+    if (!favorites.some(fav => fav.id === coin.id)) {
+      favorites.push(coin);  // Store the entire coin object
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+      renderFavorites();
+    }
   }
 }
 
-// Render favorites list
+// Render the list of favorite coins with name and symbol
 function renderFavorites() {
   const favorites = JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
   const favoritesList = document.getElementById('favorites-list');
   
   favoritesList.innerHTML = '';
   
-  favorites.forEach(coinId => {
+  favorites.forEach(coin => {
     const favoriteItem = document.createElement('li');
-    favoriteItem.textContent = coinId;
+    favoriteItem.textContent = `${coin.name} (${coin.symbol})`;  // Display name and symbol
     favoritesList.appendChild(favoriteItem);
   });
 }
