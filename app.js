@@ -1,4 +1,4 @@
-const API_KEY = 'ed7f0021-9abe-4d9e-82b8-95d77df78fb5';
+const API_KEY = 'ed7f0021-9abe-4d9e-82b8-95d77df78fb5'; // Replace with your CoinMarketCap API Key
 const API_URL = 'https://cors-anywhere.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
 const FAVORITES_KEY = 'favorites';
 
@@ -17,6 +17,8 @@ async function fetchCoins() {
 
     const data = await response.json();
     allCoins = data.data;
+
+    console.log('Fetched coins:', allCoins); // Check if coins are fetched successfully
 
     if (allCoins.length > 0) {
       renderCoins(allCoins); // Render the fetched coins
@@ -51,12 +53,13 @@ function renderCoins(coins) {
 // Add a coin to the favorites list (store the full coin object)
 function addToFavorites(coinId) {
   const coin = allCoins.find(c => c.id === coinId);
-  console.log('Selected coin for favorites:', coin);  // Log selected coin
+  console.log('Selected coin for favorites:', coin);  // Log selected coin to verify
 
   if (coin) {
     let favorites = JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
-    console.log('Current favorites:', favorites);  // Log current favorites
+    console.log('Current favorites:', favorites);  // Log current favorites to verify
 
+    // Check if coin is already in favorites to avoid duplicates
     if (!favorites.some(fav => fav.id === coin.id)) {
       favorites.push(coin);  // Store the entire coin object
       localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
@@ -69,8 +72,8 @@ function addToFavorites(coinId) {
 function renderFavorites() {
   const favorites = JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
   console.log('Rendering favorites:', favorites);  // Log favorites being rendered
+
   const favoritesList = document.getElementById('favorites-list');
-  
   favoritesList.innerHTML = '';
 
   favorites.forEach(coin => {
