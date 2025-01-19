@@ -1,5 +1,4 @@
-const apiKey = 'ed7f0021-9abe-4d9e-82b8-95d77df78fb5';
-const apiUrl = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
+const apiUrl = 'http://localhost:3000/cryptos'; // Backend proxy URL
 
 const cryptoList = document.getElementById('crypto-list');
 const favoritesList = document.getElementById('favorites');
@@ -10,9 +9,7 @@ let favorites = [];
 // Fetch data from the API
 async function fetchCryptoData() {
   try {
-    const response = await fetch(apiUrl, {
-      headers: { 'X-CMC_PRO_API_KEY': apiKey },
-    });
+    const response = await fetch(apiUrl);
     const data = await response.json();
     displayCryptos(data.data);
   } catch (error) {
