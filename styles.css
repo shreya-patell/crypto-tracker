@@ -1,0 +1,66 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: white;
+  text-align: center;
+}
+
+header {
+  padding: 20px;
+  background: #0f3460;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+header input {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.crypto-container {
+  margin: 20px;
+  padding: 20px;
+  background: #1f4068;
+  border-radius: 10px;
+}
+
+.crypto-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin: 10px 0;
+  background: #16213e;
+  border-radius: 8px;
+}
+
+.crypto-card:hover {
+  background: #0f3460;
+  cursor: pointer;
+}
+
+button {
+  padding: 5px 10px;
+  background: #e94560;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ba274a;
+}
+
+footer {
+  padding: 10px;
+  background: #0f3460;
+  color: #ccc;
+}
