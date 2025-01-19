@@ -1,4 +1,4 @@
-const API_KEY = 'YOUR_COINMARKETCAP_API_KEY'; // Replace with your CoinMarketCap API Key
+const API_KEY = 'ed7f0021-9abe-4d9e-82b8-95d77df78fb5';
 const API_URL = 'https://cors-anywhere.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
 const FAVORITES_KEY = 'favorites';
 
