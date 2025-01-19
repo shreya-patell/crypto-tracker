@@ -18,7 +18,7 @@ async function fetchCoins() {
     const data = await response.json();
     allCoins = data.data;
 
-    console.log('Fetched coins:', allCoins); // Check if coins are fetched successfully
+    console.log('Fetched coins:', allCoins); // Log fetched coins to verify
 
     if (allCoins.length > 0) {
       renderCoins(allCoins); // Render the fetched coins
@@ -30,7 +30,7 @@ async function fetchCoins() {
   }
 }
 
-// Render coins on the page
+// Render coins on the page with cards
 function renderCoins(coins) {
   const coinsList = document.getElementById('coins-list');
   coinsList.innerHTML = '';
