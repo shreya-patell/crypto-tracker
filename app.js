@@ -1,8 +1,10 @@
 const API_KEY = 'ed7f0021-9abe-4d9e-82b8-95d77df78fb5';
-const API_URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
+const API_URL = 'https://cors-anywhere.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
 const FAVORITES_KEY = 'favorites';
 
-// Helper to fetch coin data
+let allCoins = [];
+
+// Fetch coins using a proxy service to avoid CORS issues
 async function fetchCoins() {
   const response = await fetch(API_URL, {
     method: 'GET',
@@ -13,12 +15,12 @@ async function fetchCoins() {
   });
   
   const data = await response.json();
-  return data.data;
+  allCoins = data.data;
+  renderCoins(allCoins); // Render the fetched coins
 }
 
 // Render coins on the page
-async function renderCoins() {
-  const coins = await fetchCoins();
+function renderCoins(coins) {
   const coinsList = document.getElementById('coins-list');
   
   coinsList.innerHTML = '';
@@ -62,6 +64,16 @@ function renderFavorites() {
   });
 }
 
+// Filter coins based on search input
+function filterCoins() {
+  const searchValue = document.getElementById('search-bar').value.toLowerCase();
+  const filteredCoins = allCoins.filter(coin => 
+    coin.name.toLowerCase().includes(searchValue) || 
+    coin.symbol.toLowerCase().includes(searchValue)
+  );
+  renderCoins(filteredCoins); // Re-render the filtered list of coins
+}
+
 // Chart rendering for historical data (sample code)
 function renderChart() {
   const ctx = document.getElementById('chart-container').getContext('2d');
@@ -99,7 +111,7 @@ function renderChart() {
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', () => {
-  renderCoins();
+  fetchCoins(); // Fetch coins on page load
   renderFavorites();
   renderChart();
 });
